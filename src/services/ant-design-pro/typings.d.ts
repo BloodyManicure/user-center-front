@@ -29,6 +29,8 @@ declare namespace API {
     currentAuthority?: string;
   };
 
+  type RegisterResult = number;
+
   type PageParams = {
     current?: number;
     pageSize?: number;
