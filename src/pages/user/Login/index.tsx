@@ -42,7 +42,8 @@ const Login: React.FC = () => {
         ...values,
         type,
       });
-      if (msg.status === 'ok') {
+      console.log('res: ', msg);
+      if (msg !== null) {
         const defaultLoginSuccessMessage = '登录成功！';
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
@@ -52,7 +53,7 @@ const Login: React.FC = () => {
         const { redirect } = query as {
           redirect: string;
         };
-        history.push(redirect || '/');
+        history.push(redirect || '/welcome');
         return;
       }
       console.log(msg);
@@ -64,6 +65,9 @@ const Login: React.FC = () => {
     }
   };
   const { status, type: loginType } = userLoginState;
+  const register = () => {
+    history.push('/user/register');
+  }
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -122,13 +126,14 @@ const Login: React.FC = () => {
           <div
             style={{
               marginBottom: 24,
+              display: 'flex',
+              justifyContent: 'space-between'
             }}
           >
-            <a
-              style={{
-                float: 'right',
-              }}
-            >
+            <a onClick={register}>
+              注册账号
+            </a>
+            <a>
               忘记密码 ?
             </a>
           </div>
